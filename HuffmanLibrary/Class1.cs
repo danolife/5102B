@@ -53,7 +53,7 @@ namespace HuffmanLibrary
             pNodelist.RemoveAt(0);
         }
 
-        bool IPlugin.Compress(ref HuffmanData data)
+        public bool Compress(ref HuffmanData data)
         {
             Dictionary<byte, int> dictOcc = lettreOcc(data.uncompressedData);
             Dictionary<byte, List<bool>> huffcode = new Dictionary<byte, List<bool>>();
@@ -89,10 +89,10 @@ namespace HuffmanLibrary
                 huffcode.Add(currentLetter, code);
             }
 
-            foreach (KeyValuePair<byte, List<bool>> pair in huffcode)
+            /*foreach (KeyValuePair<byte, List<bool>> pair in huffcode)
             {
                 Console.WriteLine("{0} - {1}", Convert.ToChar(pair.Key), pair.Value);
-            }
+            }*/
 
             data.sizeOfUncompressedData = data.uncompressedData.Length;
 
@@ -112,6 +112,7 @@ namespace HuffmanLibrary
 
             // determiner la taille de la compressed byte array
             int finalsize = finalList.Count / 8;
+            data.compressedData = new byte[finalsize];
             // boucle de remplissage de la byte array
             for (int j = 0; j < finalsize; j++)
             {
@@ -139,7 +140,9 @@ namespace HuffmanLibrary
 
         string IPlugin.PluginName
         {
-            get { throw new NotImplementedException(); }
+            get { return "MonPlugin"; }
         }
+        
+        
     }
 }

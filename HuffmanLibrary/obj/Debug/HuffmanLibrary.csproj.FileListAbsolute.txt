@@ -1,6 +1,6 @@
-c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\bin\Debug\HuffmanLibrary.dll
 c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\bin\Debug\HuffmanLibrary.pdb
 c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\bin\Debug\HuffmanData.dll
 c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\obj\Debug\HuffmanLibrary.csprojResolveAssemblyReference.cache
-c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\obj\Debug\HuffmanLibrary.dll
 c:\users\dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\obj\Debug\HuffmanLibrary.pdb
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\bin\Debug\HuffmanLibrary.dll
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\HuffmanLibrary\obj\Debug\HuffmanLibrary.dll
