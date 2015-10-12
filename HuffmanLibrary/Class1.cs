@@ -99,46 +99,18 @@ namespace HuffmanLibrary
         public bool Compress(ref HuffmanData data)
         {
             Dictionary<byte, int> dictOcc = lettreOcc(data.uncompressedData);
-            /*Dictionary<byte, List<bool>> huffcode = new Dictionary<byte, List<bool>>();
-            List<Noeud> nodelist = new List<Noeud>();
-            List<Noeud> leaflist = new List<Noeud>();
-            */
             List<bool> finalList = new List<bool>();
             
             // convert dictOcc to List<KVP> for huffman data
             data.frequency = dictOcc.ToList();
             data.sizeOfUncompressedData = data.uncompressedData.Length;
-            /*
-            foreach (var pair in dictOcc)
-            {
-                Noeud n = new Noeud(pair.Value, pair.Key);
-                nodelist.Add(n);
-                leaflist.Add(n);
-            }
+            
 
-            while (nodelist.Count > 1)
-            {
-                iteration(ref nodelist);
-            }
-
-            foreach (Noeud leaf in leaflist)
-            {
-                byte currentLetter = leaf.getLetter();
-                List<bool> code = new List<bool>();
-                Noeud n = leaf;
-                while (n.getParent() != null)
-                {
-                    code.Insert(0, n.getIsRight());
-                    n = n.getParent();
-                }
-                huffcode.Add(currentLetter, code);
-            } */
-
-            foreach (KeyValuePair<byte, List<bool>> pair in Huffcreation(dictOcc))
+            /*foreach (KeyValuePair<byte, List<bool>> pair in Huffcreation(dictOcc))
             {
                 string test = string.Join(",", pair.Value.ToArray());
                 Console.WriteLine("{0} - {1}", Convert.ToChar(pair.Key), test);
-            }
+            }*/
 
             
 
@@ -191,19 +163,19 @@ namespace HuffmanLibrary
             // Reproduit le code Huffmann
             Dictionary<byte, List<bool>> codeHuff = Huffcreation(tableFreq);
 
-            foreach (KeyValuePair<byte, List<bool>> pair in codeHuff)
+            /*foreach (KeyValuePair<byte, List<bool>> pair in codeHuff)
             {
                 string test = string.Join(",", pair.Value.ToArray());
                 Console.WriteLine("{0} - {1}", Convert.ToChar(pair.Key), test);
-            }
+            }*/
             
             // Crée un BitArray à partir du tableau de bytes
             
-            for (int i = 0; i < 4; i++)
+            /*for (int i = 0; i < 4; i++)
             {
                 Console.WriteLine(data.compressedData[i].ToString());
                 
-            }
+            }*/
             List<bool> bits = new List<bool>();
 
             for (int i = 0; i < data.compressedData.Length; i++ )
@@ -211,39 +183,37 @@ namespace HuffmanLibrary
                 bits.AddRange(byteToBool(data.compressedData[i]).ToList());
             }
             
-            StringBuilder sb = new StringBuilder();
+            /*StringBuilder sb = new StringBuilder();
             foreach (var b in bits)
             {
                 sb.Append((bool)b ? "1" : "0");
             }
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(sb.ToString());*/
 
 
             List<bool> temp = new List<bool>();
             temp.Add(bits[0]);
             int count = 0;
-            //List<byte> finalList = new List<byte>();
-            //
             for(int i = 1; i< data.sizeOfUncompressedData; i++){
                 
                 foreach (KeyValuePair<byte, List<bool>> code in codeHuff)
                 {
-                    //Console.WriteLine("aymeric");
+
                     if (compare(temp,code.Value)) {
-                        //finalList.Add(code.Key);
+
                         data.uncompressedData[count] = code.Key;
                         count++;
                         temp.Clear();
-                        //Console.WriteLine("dany");
+
                     }
                 }
                 temp.Add(bits[i]);
             }
-            Console.WriteLine("\n\nConversion :");
+            /*Console.WriteLine("\n\nConversion :");
             for (int i = 0; i < data.sizeOfUncompressedData; i++)
             {               
                 Console.WriteLine(Convert.ToChar(data.uncompressedData[i]));
-            }
+            }*/
             return true;
         }
 
@@ -265,15 +235,6 @@ namespace HuffmanLibrary
                 
             }
             return true;
-        }
-
-        static IEnumerable<bool> GetBitsStartingFromLSB(byte b)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                yield return (b % 2 == 0) ? false : true;
-                b = (byte)(b >> 1);
-            }
         }
 
         static bool[] byteToBool(byte b) { 
