@@ -136,6 +136,12 @@ namespace HuffmanLibrary
         bool IPlugin.Decompress(ref HuffmanData data)
         {
             throw new NotImplementedException();
+            int size = data.sizeOfUncompressedData;
+            while (size > 0)
+            {
+                
+                size--;
+            }
         }
 
         string IPlugin.PluginName
