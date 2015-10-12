@@ -192,22 +192,25 @@ namespace HuffmanLibrary
 
 
             List<bool> temp = new List<bool>();
-            temp.Add(bits[0]);
+            //temp.Add(bits[0]);
             int count = 0;
-            for(int i = 1; i< data.sizeOfUncompressedData; i++){
-                
+            //Console.WriteLine(data.sizeOfUncompressedData);
+            data.uncompressedData = new byte[data.sizeOfUncompressedData];
+            for(int i = 0; i< data.compressedData.Length*8; i++){
+                temp.Add(bits[i]);
                 foreach (KeyValuePair<byte, List<bool>> code in codeHuff)
                 {
 
                     if (compare(temp,code.Value)) {
 
                         data.uncompressedData[count] = code.Key;
+                        /*Console.WriteLine("data.uncompressedData[" + count + "] = " + data.uncompressedData[count]);*/
                         count++;
                         temp.Clear();
 
                     }
                 }
-                temp.Add(bits[i]);
+                
             }
             /*Console.WriteLine("\n\nConversion :");
             for (int i = 0; i < data.sizeOfUncompressedData; i++)

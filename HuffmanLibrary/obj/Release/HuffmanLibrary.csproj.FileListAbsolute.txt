@@ -3,3 +3,4 @@ D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\Huf
 D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\bin\Release\HuffmanData.dll
 D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Release\HuffmanLibrary.dll
 D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Release\HuffmanLibrary.pdb
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Release\HuffmanLibrary.csprojResolveAssemblyReference.cache
