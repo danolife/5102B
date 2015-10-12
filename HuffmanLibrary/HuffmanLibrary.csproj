@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HuffmanData">
-      <HintPath>..\..\..\..\..\Google Drive\ESIEE\E5\DotNet\ESIEE Loader\HuffmanData.dll</HintPath>
+      <HintPath>C:\Users\Aymeric\Downloads\ESIEE_Loader\ESIEE Loader\HuffmanData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

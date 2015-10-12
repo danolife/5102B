@@ -204,13 +204,13 @@ namespace HuffmanLibrary
                 Console.WriteLine(data.compressedData[i].ToString());
                 
             }
-            /*if (BitConverter.IsLittleEndian)
+            List<bool> bits = new List<bool>();
+
+            for (int i = 0; i < data.compressedData.Length; i++ )
             {
-                data.compressedData = data.compressedData.Reverse().ToArray();
-            }*/
-            BitArray bits = new BitArray(data.compressedData);
+                bits.AddRange(byteToBool(data.compressedData[i]).ToList());
+            }
             
-            //List<bool> bitas = data.compressedData[0].ToBoolean().ToList();
             StringBuilder sb = new StringBuilder();
             foreach (var b in bits)
             {
@@ -224,7 +224,7 @@ namespace HuffmanLibrary
             int count = 0;
             //List<byte> finalList = new List<byte>();
             //
-            for(int i = 1; i< data.compressedData.Length*8; i++){
+            for(int i = 1; i< data.sizeOfUncompressedData; i++){
                 
                 foreach (KeyValuePair<byte, List<bool>> code in codeHuff)
                 {
@@ -274,6 +274,55 @@ namespace HuffmanLibrary
                 yield return (b % 2 == 0) ? false : true;
                 b = (byte)(b >> 1);
             }
+        }
+
+        static bool[] byteToBool(byte b) { 
+            //List<bool> listBool = new List<bool>();
+            bool[] tabBool = new bool[8] {false,false,false,false,false,false,false,false};
+            //Console.WriteLine("B = " + b);
+            int bInt = Convert.ToInt32(b);
+            //Console.WriteLine("BInt = " + bInt);
+            if (bInt - 128 >= 0) {
+                bInt -= 128;
+                tabBool[0] = true;
+            }
+            if (bInt - 64 >= 0)
+            {
+                bInt -= 64;
+                tabBool[1] = true;
+            }
+            if (bInt - 32 >= 0)
+            {
+                bInt -= 32;
+                tabBool[2] = true;
+            }
+            if (bInt - 16 >= 0)
+            {
+                bInt -= 16;
+                tabBool[3] = true;
+            }
+            if (bInt - 8 >= 0)
+            {
+                bInt -= 8;
+                tabBool[4] = true;
+            }
+            if (bInt - 4 >= 0)
+            {
+                bInt -= 4;
+                tabBool[5] = true;
+            }
+            if (bInt - 2 >= 0)
+            {
+                bInt -= 2;
+                tabBool[6] = true;
+            }
+            if (bInt - 1 >= 0)
+            {
+                bInt -= 1;
+                tabBool[7] = true;
+            }
+
+            return tabBool;
         }
         
     }

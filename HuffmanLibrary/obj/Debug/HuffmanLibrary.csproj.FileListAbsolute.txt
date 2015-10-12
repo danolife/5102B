@@ -9,3 +9,9 @@ C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\HuffmanLibrar
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.csprojResolveAssemblyReference.cache
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.dll
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.pdb
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.csprojResolveAssemblyReference.cache
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.dll
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\bin\Debug\HuffmanLibrary.dll
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\bin\Debug\HuffmanLibrary.pdb
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\bin\Debug\HuffmanData.dll
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\HuffmanLibrary\obj\Debug\HuffmanLibrary.pdb
