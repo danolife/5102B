@@ -1,0 +1,17 @@
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\ConsoleApplication2.pdb
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\HuffmanData.dll
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\HuffmanLibrary.dll
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\bin\Debug\HuffmanLibrary.pdb
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\obj\Debug\ConsoleApplication2.csprojResolveAssemblyReference.cache
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
+C:\Users\Dany\documents\visual studio 2013\Projects\HuffmanLibrary\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\ConsoleApplication2.pdb
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\HuffmanLibrary.dll
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\HuffmanLibrary.pdb
+C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.csprojResolveAssemblyReference.cache
