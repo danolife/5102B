@@ -15,3 +15,6 @@ C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplic
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\HuffmanLibrary.dll
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\bin\Debug\HuffmanLibrary.pdb
 C:\Users\Aymeric\Downloads\5102B-DotNet-master\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.csprojResolveAssemblyReference.cache
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\ConsoleApplication2\bin\Debug\ConsoleApplication2.exe.config
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.exe
+D:\Aymeric\Bureau-AyK\5102B-DotNet-master (Aymeric Edit)\5102B-DotNet-master\ConsoleApplication2\obj\Debug\ConsoleApplication2.pdb
