@@ -10,24 +10,28 @@ namespace HuffmanLibrary
 {
     public class HuffmanLibrary : MarshalByRefObject, IPlugin
     {
+
+        
+
         /* lettreOcc calcule l'occurence de chaque lettre de notre message à compresser 
          * Retourne un dictionnaire<lettre, occurence> indiquant la fréquence de chaque lettre.
          */
         public static Dictionary<byte, int> lettreOcc(byte[] text)
         {
             Dictionary<byte, int> fDictOcc = new Dictionary<byte, int>();
-            for (int i = 0; i < text.Length; i++)
-            {
-                byte currentByte = text[i];
-                if (fDictOcc.ContainsKey(currentByte))
+            
+                foreach (byte currentByte in text)
                 {
-                    fDictOcc[currentByte]++;
-                }
-                else
-                {
-                    fDictOcc.Add(currentByte, 1);
-                }
-            }
+                    if (fDictOcc.ContainsKey(currentByte))
+                    {
+                        fDictOcc[currentByte]++;
+                    }
+                    else
+                    {
+                        fDictOcc.Add(currentByte, 1);
+                    }
+        }
+            
 
 
 
@@ -35,23 +39,27 @@ namespace HuffmanLibrary
         }
 
         /* Iteration de création de l'arbre du code Huffmann*/
-        public static void iteration(ref List<Noeud> pNodelist)
+        public static Noeud iteration(ref List<Noeud> pNodelist)
         {
-            // sort
-            pNodelist = pNodelist.OrderBy(n => n.getValue()).ToList();
-            // add children to parent
-            Noeud parent = new Noeud(pNodelist[0].getValue() + pNodelist[1].getValue(), pNodelist[0], pNodelist[1]);
-            // add new to list
-            pNodelist.Add(parent);
-            // add parent to children
-            pNodelist[0].setParent(parent);
-            pNodelist[1].setParent(parent);
-            // set if right or left
-            pNodelist[0].setIsRight(false);
-            pNodelist[1].setIsRight(true);
-            // remove old 2 from list
-            pNodelist.RemoveAt(0);
-            pNodelist.RemoveAt(0);
+            while (pNodelist.Count > 1)
+            {
+                // sort
+                pNodelist = pNodelist.OrderBy(n => n.getValue()).ToList();
+                // add children to parent
+                Noeud parent = new Noeud(pNodelist[0].getValue() + pNodelist[1].getValue(), pNodelist[0], pNodelist[1]);
+                // add new to list
+                pNodelist.Add(parent);
+                // add parent to children
+                pNodelist[0].setParent(parent);
+                pNodelist[1].setParent(parent);
+                // set if right or left
+                pNodelist[0].setIsRight(false);
+                pNodelist[1].setIsRight(true);
+                // remove old 2 from list
+                pNodelist.RemoveAt(0);
+                pNodelist.RemoveAt(0);
+            }
+            return pNodelist[0];
         }
 
         /* Retourne un dictionnaire contenant le code Huffmann de chaque lettre à partir de la table des Fréquences*/
@@ -59,6 +67,7 @@ namespace HuffmanLibrary
         {
             //Dictionary<byte, int> dictOcc = lettreOcc(data.uncompressedData);
             Dictionary<byte, List<bool>> huffcode = new Dictionary<byte, List<bool>>();
+            
             List<Noeud> nodelist = new List<Noeud>();
             List<Noeud> leaflist = new List<Noeud>();
             //List<bool> finalList = new List<bool>();
@@ -72,11 +81,9 @@ namespace HuffmanLibrary
                 nodelist.Add(n);
                 leaflist.Add(n);
             }
-
-            while (nodelist.Count > 1)
-            {
-                iteration(ref nodelist);
-            }
+            
+            iteration(ref nodelist);
+            
 
             foreach (Noeud leaf in leaflist)
             {
@@ -114,25 +121,61 @@ namespace HuffmanLibrary
 
             
 
-            for (int i = 0; i < data.sizeOfUncompressedData; i++)
-            {
-                finalList.AddRange(Huffcreation(dictOcc)[data.uncompressedData[i]]);
+            //for (int i = 0; i < data.sizeOfUncompressedData; i++)
+            Dictionary<byte, List<bool>> huffcode = Huffcreation(dictOcc);
+            var dataCompressed = new List<byte>();
+            byte count = 0;
+            byte currentByte = 0;
+            foreach (byte b in data.uncompressedData) 
+            {    //****************************************
+                
+                bool[] tabBool = huffcode[b].ToArray();
+
+                foreach (bool bit in tabBool)
+                {
+                    currentByte <<= 1;
+                    if (bit)
+                        currentByte += 1;
+                    count += 32;
+                    if (count == 0)
+                    {
+                        dataCompressed.Add(currentByte);
+                        currentByte = 0;
+                    }
+                }
             }
+            if (count != 0)
+            {
+                while(count !=0)
+                {
+                    currentByte <<= 1;
+                    count += 32;
+                }
+                dataCompressed.Add(currentByte);
+            }
+
+            data.compressedData = dataCompressed.ToArray();
+                //****************************************
+                //bool[] code = Huffcreation(dictOcc)[b];
+                //finalList.AddRange(Huffcreation(dictOcc)[b]);
+                
+                //finalList.AddRange(huffcode[b]);
+            
 
             // zero padding
             // il faut ajouter (8 - finalList.Count % 8) zeros ou 0 si c'est deja un multiple de 8
-            int nbZeros = (finalList.Count % 8 == 0) ? 0 : (8 - finalList.Count % 8);
+           /* int nbZeros = (finalList.Count % 8 == 0) ? 0 : (8 - finalList.Count % 8);
             while (nbZeros > 0)
             {
                 finalList.Add(false);
                 nbZeros--;
-            }
+            }*/
 
             // determiner la taille de la compressed byte array
-            int finalsize = finalList.Count / 8;
-            data.compressedData = new byte[finalsize];
+           /* int finalsize = finalList.Count / 8;
+            data.compressedData = new byte[finalsize];*/
             // boucle de remplissage de la byte array
-            for (int j = 0; j < finalsize; j++)
+           /* for (int j = 0; j < finalsize; j++)
             {
                 // une iteration pour un byte
                 byte b = 0;
@@ -146,10 +189,10 @@ namespace HuffmanLibrary
                     }
                 }
                 data.compressedData[j] = b;
-            }
-            for(int i=0;i<finalsize;i++){
-                Console.WriteLine(data.compressedData[i]);
-            }
+            }*/
+            
+            
+
             return true;
         }
 
@@ -158,10 +201,85 @@ namespace HuffmanLibrary
 
         public bool Decompress(ref HuffmanData data)
         {
+
+
+            List<Noeud> nodelist = new List<Noeud>();
+            List<Noeud> leaflist = new List<Noeud>();
+            //List<bool> finalList = new List<bool>();
+
+            // convert dictOcc to List<KVP> for huffman data
+            //data.frequency = tabFreq.ToList();
+            Dictionary<byte, int> tabFreq = data.frequency.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            /*foreach (KeyValuePair<byte, int> pair in tabFreq)
+            {
+                Console.WriteLine("caca : {0} - {1}", Convert.ToChar(pair.Key), pair.Value);
+            }*/
+
+
+            foreach (var pair in tabFreq)
+            {
+                Noeud n = new Noeud(pair.Value, pair.Key);
+                nodelist.Add(n);
+                leaflist.Add(n);
+            }
+
+            Noeud lastNode = iteration(ref nodelist);
+
+            Noeud currentNode = lastNode;
+            List<byte> listBytes = new List<byte>();
+            int count = 0;
+
+            foreach (byte b in data.compressedData) {
+                
+                for(byte mask=128; mask != 0; mask >>=1){
+
+                    if (currentNode.getLeftChild() != null)
+                    {
+                        currentNode = (b & mask) == 0 ? currentNode.getLeftChild() : currentNode.getRightChild();
+                    }
+
+                    if(count < data.sizeOfUncompressedData && currentNode.getLeftChild() == null){
+                       
+                        listBytes.Add(currentNode.getLetter());
+                        count++;
+                        currentNode = lastNode;
+                    }  
+
+                }
+            }
+
+            //Console.WriteLine(data.sizeOfUncompressedData);
+            data.uncompressedData = new byte[data.sizeOfUncompressedData];
+
+            data.uncompressedData = listBytes.ToArray();
+
+            //Console.WriteLine("\n\nConversion :");
+ 
+            /*for (int i = 0; i < data.sizeOfUncompressedData; i++)
+            {
+                Console.WriteLine(Convert.ToChar(data.uncompressedData[i]));
+            }*/
+            /*Console.WriteLine(Convert.ToChar(data.uncompressedData[0]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[1]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[2]));
+
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[3]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[4]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[5]));
+
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[6]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[7]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[8]));
+
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[9]));
+            Console.WriteLine(Convert.ToChar(data.uncompressedData[10]));*/
+            return true;
+            
             // Convertie la list de freq en un dictionnaire
-            Dictionary<byte,int> tableFreq = data.frequency.ToDictionary(pair => pair.Key, pair => pair.Value);
+            
             // Reproduit le code Huffmann
-            Dictionary<byte, List<bool>> codeHuff = Huffcreation(tableFreq);
+            //Dictionary<byte, List<bool>> codeHuff = Huffcreation(tableFreq);
 
             /*foreach (KeyValuePair<byte, List<bool>> pair in codeHuff)
             {
@@ -176,12 +294,12 @@ namespace HuffmanLibrary
                 Console.WriteLine(data.compressedData[i].ToString());
                 
             }*/
-            List<bool> bits = new List<bool>();
+           // List<bool> bits = new List<bool>();
 
-            for (int i = 0; i < data.compressedData.Length; i++ )
+            /*for (int i = 0; i < data.compressedData.Length; i++ )
             {
                 bits.AddRange(byteToBool(data.compressedData[i]).ToList());
-            }
+            }*/
             
             /*StringBuilder sb = new StringBuilder();
             foreach (var b in bits)
@@ -191,11 +309,11 @@ namespace HuffmanLibrary
             Console.WriteLine(sb.ToString());*/
 
 
-            List<bool> temp = new List<bool>();
+            //List<bool> temp = new List<bool>();
             //temp.Add(bits[0]);
-            int count = 0;
+            //int count = 0;
             //Console.WriteLine(data.sizeOfUncompressedData);
-            data.uncompressedData = new byte[data.sizeOfUncompressedData];
+            /*data.uncompressedData = new byte[data.sizeOfUncompressedData];
             for(int i = 0; i< data.compressedData.Length*8; i++){
                 temp.Add(bits[i]);
                 foreach (KeyValuePair<byte, List<bool>> code in codeHuff)
@@ -205,19 +323,15 @@ namespace HuffmanLibrary
 
                         data.uncompressedData[count] = code.Key;
                         /*Console.WriteLine("data.uncompressedData[" + count + "] = " + data.uncompressedData[count]);*/
-                        count++;
+                        /*count++;
                         temp.Clear();
 
                     }
                 }
                 
-            }
-            /*Console.WriteLine("\n\nConversion :");
-            for (int i = 0; i < data.sizeOfUncompressedData; i++)
-            {               
-                Console.WriteLine(Convert.ToChar(data.uncompressedData[i]));
             }*/
-            return true;
+            
+            //return true;
         }
 
         string IPlugin.PluginName
@@ -240,11 +354,22 @@ namespace HuffmanLibrary
             return true;
         }
 
-        static bool[] byteToBool(byte b) { 
+       /* static bool[] byteToBool(byte b) { 
             //List<bool> listBool = new List<bool>();
             bool[] tabBool = new bool[8] {false,false,false,false,false,false,false,false};
             //Console.WriteLine("B = " + b);
-            int bInt = Convert.ToInt32(b);
+            int bInt = b;
+            int a = 0;
+            for (byte binary = 128; binary != 0; binary >>= 1) {
+                if (bInt - binary >= 0) {
+                    bInt -= binary;
+                    tabBool[a] = true;
+                }
+                a++;
+            }
+
+
+            }
             //Console.WriteLine("BInt = " + bInt);
             if (bInt - 128 >= 0) {
                 bInt -= 128;
@@ -287,7 +412,7 @@ namespace HuffmanLibrary
             }
 
             return tabBool;
-        }
+        }*/
         
     }
 }
